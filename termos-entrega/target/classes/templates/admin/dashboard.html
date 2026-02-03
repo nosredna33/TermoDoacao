@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Termos de Entrega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/admin/dashboard}">Sistema de Termos de Entrega</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/admin/dashboard}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/termos}">Termos de Entrega</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" th:href="@{/admin/usuarios}">Usuários</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-text text-white me-3">
+                            <i class="bi bi-person-circle"></i> <span sec:authentication="name"></span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <form th:action="@{/auth/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container my-4">
+        <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        
+        <h2 class="mb-4">Dashboard</h2>
+        
+        <!-- Cards de Estatísticas -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Total de Termos</h6>
+                                <h2 class="mb-0" th:text="${totalTermos}">0</h2>
+                            </div>
+                            <i class="bi bi-file-earmark-text" style="font-size: 3rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Busca Avançada</h6>
+                                <p class="mb-0">Disponível</p>
+                            </div>
+                            <i class="bi bi-search" style="font-size: 3rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Relatórios</h6>
+                                <p class="mb-0">PDF Disponível</p>
+                            </div>
+                            <i class="bi bi-file-pdf" style="font-size: 3rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gráficos -->
+        <div class="row mt-4">
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-bar-chart-fill"></i> Termos por Região</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartRegiao" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-pie-chart-fill"></i> Termos por Estado (Top 10)</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartEstado" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Acesso Rápido -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-lightning-fill"></i> Acesso Rápido</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a th:href="@{/admin/termos}" class="list-group-item list-group-item-action">
+                                <i class="bi bi-list-ul text-primary"></i> Ver Todos os Termos de Entrega
+                            </a>
+                            <a th:href="@{/public/formulario}" class="list-group-item list-group-item-action">
+                                <i class="bi bi-plus-circle text-success"></i> Registrar Novo Termo
+                            </a>
+                            <a th:href="@{/admin/usuarios}" class="list-group-item list-group-item-action" sec:authorize="hasRole('ADMIN')">
+                                <i class="bi bi-people text-warning"></i> Gerenciar Usuários
+                            </a>
+                            <a href="/actuator/health" target="_blank" class="list-group-item list-group-item-action">
+                                <i class="bi bi-heart-pulse text-danger"></i> Status do Sistema (Actuator)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-light text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 Ministério da Saúde - Sistema de Termos de Entrega</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cores para os gráficos
+        const coresRegioes = {
+            'Norte': '#28a745',
+            'Nordeste': '#ffc107',
+            'Centro-Oeste': '#17a2b8',
+            'Sudeste': '#007bff',
+            'Sul': '#6f42c1'
+        };
+        
+        const coresEstados = [
+            '#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#dc3545',
+            '#fd7e14', '#ffc107', '#198754', '#20c997', '#0dcaf0'
+        ];
+        
+        // Carregar dados e criar gráfico por região
+        fetch('/api/relatorios/por-regiao')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.regiao);
+                const valores = data.map(item => item.total);
+                const cores = labels.map(label => coresRegioes[label] || '#6c757d');
+                
+                const ctx = document.getElementById('chartRegiao').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Quantidade de Termos',
+                            data: valores,
+                            backgroundColor: cores,
+                            borderColor: cores,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar dados por região:', error));
+        
+        // Carregar dados e criar gráfico por estado
+        fetch('/api/relatorios/por-estado')
+            .then(response => response.json())
+            .then(data => {
+                // Pegar apenas top 10
+                const top10 = data.slice(0, 10);
+                const labels = top10.map(item => item.uf);
+                const valores = top10.map(item => item.total);
+                
+                const ctx = document.getElementById('chartEstado').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Quantidade de Termos',
+                            data: valores,
+                            backgroundColor: coresEstados,
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    boxWidth: 15,
+                                    padding: 10
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao carregar dados por estado:', error));
+    </script>
+</body>
+</html>

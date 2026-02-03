@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Termo de Entrega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <span class="navbar-brand">Sistema de Termos de Entrega - Ministério da Saúde</span>
+        </div>
+    </nav>
+    
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Formulário de Registro de Termo de Entrega de Equipamentos</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                        
+                        <form th:action="@{/public/formulario}" th:object="${termoEntregaDTO}" method="post">
+                            <h5 class="mb-3">Dados do Responsável</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="tipoEntidade" class="form-label">Tipo de Entidade *</label>
+                                    <select class="form-select" id="tipoEntidade" th:field="*{tipoEntidade}" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="PREFEITO">Prefeito</option>
+                                        <option value="SECRETARIO_MUNICIPAL_SAUDE">Secretário Municipal de Saúde</option>
+                                    </select>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('tipoEntidade')}" 
+                                         th:errors="*{tipoEntidade}"></div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="nomeOrgao" class="form-label">Nome do Órgão *</label>
+                                    <input type="text" class="form-control" id="nomeOrgao" th:field="*{nomeOrgao}" required>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nomeOrgao')}" 
+                                         th:errors="*{nomeOrgao}"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nomeResponsavel" class="form-label">Nome do Responsável *</label>
+                                    <input type="text" class="form-control" id="nomeResponsavel" th:field="*{nomeResponsavel}" required>
+                                </div>
+                                
+                                <div class="col-md-3 mb-3">
+                                    <label for="cpf" class="form-label">CPF *</label>
+                                    <input type="text" class="form-control cpf-mask" id="cpf" th:field="*{cpf}" 
+                                           placeholder="000.000.000-00" required>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" 
+                                         th:errors="*{cpf}"></div>
+                                </div>
+                                
+                                <div class="col-md-3 mb-3">
+                                    <label for="cargo" class="form-label">Cargo *</label>
+                                    <input type="text" class="form-control" id="cargo" th:field="*{cargo}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="emailPessoal" class="form-label">E-mail Pessoal *</label>
+                                    <input type="email" class="form-control" id="emailPessoal" th:field="*{emailPessoal}" required>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="emailCorporativo" class="form-label">E-mail Corporativo</label>
+                                    <input type="email" class="form-control" id="emailCorporativo" th:field="*{emailCorporativo}">
+                                </div>
+                            </div>
+                            
+                            <h5 class="mb-3 mt-4">Endereço</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="cep" class="form-label">CEP *</label>
+                                    <input type="text" class="form-control cep-mask" id="cep" th:field="*{cep}" 
+                                           placeholder="00000-000" required>
+                                </div>
+                                
+                                <div class="col-md-7 mb-3">
+                                    <label for="endereco" class="form-label">Endereço *</label>
+                                    <input type="text" class="form-control" id="endereco" th:field="*{endereco}" required>
+                                </div>
+                                
+                                <div class="col-md-2 mb-3">
+                                    <label for="uf" class="form-label">UF *</label>
+                                    <select class="form-select" id="uf" th:field="*{uf}" required>
+                                        <option value="">--</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="bairro" class="form-label">Bairro *</label>
+                                    <input type="text" class="form-control" id="bairro" th:field="*{bairro}" required>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3">
+                                    <label for="cidade" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="cidade" th:field="*{cidade}" required>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3">
+                                    <label for="nomeMunicipio" class="form-label">Município *</label>
+                                    <input type="text" class="form-control" id="nomeMunicipio" th:field="*{nomeMunicipio}" 
+                                           list="municipiosList" required>
+                                    <datalist id="municipiosList"></datalist>
+                                    <input type="hidden" id="codigoIbge" th:field="*{codigoIbge}">
+                                </div>
+                            </div>
+                            
+                            <h5 class="mb-3 mt-4">Dados da Unidade Recebedora</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="enderecoCompletoUnidade" class="form-label">Endereço Completo da Unidade/Órgão Recebedor *</label>
+                                    <textarea class="form-control" id="enderecoCompletoUnidade" 
+                                              th:field="*{enderecoCompletoUnidade}" rows="2" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="siglaOrgao" class="form-label">Sigla do Órgão</label>
+                                    <input type="text" class="form-control" id="siglaOrgao" th:field="*{siglaOrgao}">
+                                </div>
+                            </div>
+                            
+                            <h5 class="mb-3 mt-4">Equipamento Doado</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="descricaoEquipamento" class="form-label">Descrição Detalhada do Equipamento *</label>
+                                    <textarea class="form-control" id="descricaoEquipamento" 
+                                              th:field="*{descricaoEquipamento}" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="bi bi-check-circle"></i> Registrar Termo de Entrega
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-light text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 Ministério da Saúde - Sistema de Termos de Entrega</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            $('.cpf-mask').mask('000.000.000-00');
+            $('.cep-mask').mask('00000-000');
+            
+            $('#nomeMunicipio').on('input', function() {
+                const termo = $(this).val();
+                const uf = $('#uf').val();
+                
+                if (termo.length >= 3) {
+                    $.ajax({
+                        url: '/api/municipios/buscar',
+                        data: { termo: termo, uf: uf },
+                        success: function(data) {
+                            const datalist = $('#municipiosList');
+                            datalist.empty();
+                            data.forEach(function(municipio) {
+                                datalist.append('<option value="' + municipio.nome + '" data-ibge="' + municipio.codigoIbge + '">');
+                            });
+                        }
+                    });
+                }
+            });
+            
+            $('#nomeMunicipio').on('change', function() {
+                const selectedValue = $(this).val();
+                const option = $('#municipiosList option[value="' + selectedValue + '"]');
+                if (option.length > 0) {
+                    $('#codigoIbge').val(option.data('ibge'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
