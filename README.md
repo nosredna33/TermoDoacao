@@ -2,14 +2,14 @@
 
 Sistema completo de gerenciamento de termos de entrega de equipamentos para municípios brasileiros com geração de PDF, assinatura digital via GOV.BR e upload de termos assinados.
 
-90% feito cpm Manus IA e 10% da minha genialidade para conduzí-la!
+Feito 80% com Manus IA e 20% da minha genialidade para conduzí-la! Pareto, Pareto, seu fanfarrão...
 
-IA é bom mas não faz nada sozinho, mas co um gênio por traz, em 3 horas está aí, pronto....
+IA é bom, mas não faz nada sozinho, Só com um gênio por traz, para fazer tudo em 3 hors. Sendo, 1 para o prompt e 2 para para corrigir os devaneios da IA. Agora está aí, pronto....
 
 # Autor
 * Anderson Luís Oliveira e Silva + Manus IA + Cartão de crédito - R$ 250,00 
 
-# Imagens:
+## Imagens:
 
 | Descricao | Imagem | 
 | --- | --- |
@@ -26,6 +26,9 @@ IA é bom mas não faz nada sozinho, mas co um gênio por traz, em 3 horas está
 | Tela 11 | <div align="center"><img src="https://github.com/nosredna33/TermoDoacao/blob/main/Tela11.png" width=50% height=auto/></div> |
 | Tela 13 | <div align="center"><img src="https://github.com/nosredna33/TermoDoacao/blob/main/Tela12.png" width=50% height=auto/></div> |
 | Tela 14 | <div align="center"><img src="https://github.com/nosredna33/TermoDoacao/blob/main/Tela13.png" width=50% height=auto/></div> |
+
+## O Prompt para tentar chegar ao mesmo resultado
+Segue o Prompt usado para chegar a este resultado [PromptProjeto.md](https://github.com/nosredna33/TermoDoacao/blob/main/PromptProjeto.md)
 
 ## 🚀 Funcionalidades
 
