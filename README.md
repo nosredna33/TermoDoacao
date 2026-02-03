@@ -2,6 +2,13 @@
 
 Sistema completo de gerenciamento de termos de entrega de equipamentos para municípios brasileiros com geração de PDF, assinatura digital via GOV.BR e upload de termos assinados.
 
+90% feito cpm Manus IA e 10% da minha genialidade para conduzí-la!
+
+IA é bom mas não faz nada sozinho, mas co um gênio por traz, em 3 horas está aí, pronto....
+
+# Autor
+* Anderson Luís Oliveira e Silva + Manus IA + Cartão de crédito - R$ 250,00 
+
 ## 🚀 Funcionalidades
 
 ### ✅ Área Pública
