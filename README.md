@@ -1,4 +1,4 @@
-# Sistema de Termos de Entrega - Ministério da Saúde
+# Sistema de Termos de Entrega
 
 Sistema completo de gerenciamento de termos de entrega de equipamentos para municípios brasileiros com geração de PDF, assinatura digital via GOV.BR e upload de termos assinados.
 
