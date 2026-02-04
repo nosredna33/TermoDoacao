@@ -59,6 +59,16 @@ public class TermoEntregaRepository {
                 termo.setDataAtualizacao(LocalDateTime.parse(dataAtualizacao.replace(" ", "T")));
             }
             
+            termo.setArquivoTermoAssinado(rs.getString("arquivo_termo_assinado"));
+            
+            String dataAssinatura = rs.getString("data_assinatura");
+            if (dataAssinatura != null && !dataAssinatura.isEmpty()) {
+                termo.setDataAssinatura(LocalDateTime.parse(dataAssinatura.replace(" ", "T")));
+            }
+            
+            String statusAssinatura = rs.getString("status_assinatura");
+            termo.setStatusAssinatura(statusAssinatura != null ? statusAssinatura : "PENDENTE");
+            
             return termo;
         }
     };
@@ -158,6 +168,7 @@ public class TermoEntregaRepository {
                      "cargo = ?, email_pessoal = ?, email_corporativo = ?, endereco = ?, bairro = ?, cidade = ?, " +
                      "uf = ?, cep = ?, nome_municipio = ?, sigla_orgao = ?, codigo_ibge = ?, " +
                      "endereco_completo_unidade = ?, descricao_equipamento = ?, novo_municipio = ?, " +
+                     "arquivo_termo_assinado = ?, data_assinatura = ?, status_assinatura = ?, " +
                      "data_atualizacao = datetime('now') WHERE id = ?";
         
         jdbcTemplate.update(sql, termo.getTipoEntidade(), termo.getNomeOrgao(), termo.getNomeResponsavel(),
@@ -165,7 +176,9 @@ public class TermoEntregaRepository {
                            termo.getEndereco(), termo.getBairro(), termo.getCidade(), termo.getUf(), termo.getCep(),
                            termo.getNomeMunicipio(), termo.getSiglaOrgao(), termo.getCodigoIbge(),
                            termo.getEnderecoCompletoUnidade(), termo.getDescricaoEquipamento(),
-                           termo.isNovoMunicipio() ? 1 : 0, termo.getId());
+                           termo.isNovoMunicipio() ? 1 : 0,
+                           termo.getArquivoTermoAssinado(), termo.getDataAssinatura(), termo.getStatusAssinatura(),
+                           termo.getId());
     }
     
     public void deleteById(Long id) {

@@ -26,6 +26,9 @@ public class TermoEntrega {
     private boolean novoMunicipio;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
+    private String arquivoTermoAssinado;
+    private LocalDateTime dataAssinatura;
+    private String statusAssinatura;
     
     public TermoEntrega() {
     }
@@ -204,5 +207,29 @@ public class TermoEntrega {
     
     public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+    
+    public String getArquivoTermoAssinado() {
+        return arquivoTermoAssinado;
+    }
+    
+    public void setArquivoTermoAssinado(String arquivoTermoAssinado) {
+        this.arquivoTermoAssinado = arquivoTermoAssinado;
+    }
+    
+    public LocalDateTime getDataAssinatura() {
+        return dataAssinatura;
+    }
+    
+    public void setDataAssinatura(LocalDateTime dataAssinatura) {
+        this.dataAssinatura = dataAssinatura;
+    }
+    
+    public String getStatusAssinatura() {
+        return statusAssinatura;
+    }
+    
+    public void setStatusAssinatura(String statusAssinatura) {
+        this.statusAssinatura = statusAssinatura;
     }
 }

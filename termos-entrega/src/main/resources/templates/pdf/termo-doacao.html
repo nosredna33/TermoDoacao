@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Termo de Doação com Encargos</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            text-align: justify;
+            color: #000;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 10px 0 20px 0;
+            text-transform: uppercase;
+        }
+        
+        p {
+            margin: 10px 0;
+            text-indent: 2cm;
+        }
+        
+        .clausula {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            text-indent: 0;
+        }
+        
+        .alinea {
+            margin-left: 2cm;
+            text-indent: 0;
+        }
+        
+        .paragrafo {
+            margin-left: 1cm;
+            text-indent: 0;
+        }
+        
+        .assinatura {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .assinatura-linha {
+            border-top: 1px solid #000;
+            width: 300px;
+            margin: 40px auto 5px auto;
+        }
+        
+        .assinatura-nome {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .assinatura-cargo {
+            margin: 2px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #000;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .valor-total {
+            font-weight: bold;
+        }
+        
+        .anexo {
+            page-break-before: always;
+        }
+        
+        ul {
+            margin-left: 2cm;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .destaque {
+            font-weight: bold;
+        }
+        
+        .rodape {
+            margin-top: 30px;
+            font-size: 10pt;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>MINUTA</h1>
+    <h2>TERMO DE DOAÇÃO COM ENCARGOS</h2>
+    
+    <h2>TERMO DE DOAÇÃO COM ENCARGOS QUE ENTRE SI CELEBRAM A UNIÃO, POR INTERMÉDIO DO MINISTÉRIO DA SAÚDE – MS, E O MUNICÍPIO DE <span th:text="${municipio}">_______________</span>.</h2>
+    
+    <p>Pelo presente instrumento, a União, por intermédio do Ministério da Saúde, nesta ato representado pelo Secretaria de Informação e Saúde Digital, com sede na Esplanada dos Ministérios, Bloco "G", Brasília, Distrito Federal, inscrita no CNPJ sob nº 00.394.544/0036-05, ora designada <span class="destaque">DOADORA</span>, por meio do Diretor do Departamento de Saúde Digital e Inovação, João Pedro Braga Félix, nomeado pela Portaria nº 1358, de 19 de novembro de 2025, da Casa Civil da Presidência da República, conforme subdelegação de competência conferida pela Portaria SEIDIGI/MS nº 15, de 12 de janeiro de 2026, e de outro lado, o MUNICÍPIO de <span class="destaque" th:text="${municipio}">____________________</span>, por meio de sua Secretaria Municipal de Saúde, inscrita(o) no CNPJ/MF n.º <span th:text="${cnpj}">_____________________</span>, com sede na Rua <span th:text="${endereco}">______________________________________________________</span>, CEP: <span th:text="${cep}">_____________</span>, doravante denominado <span class="destaque">DONATÁRIO</span>, neste ato representado pelo(a) Sr(a). <span th:text="${nomeResponsavel}">____________________________</span>, <span th:text="${cargo}">Secretário(a) Municipal de Saúde</span>, nomeado(a) pelo <span th:text="${ato_nomeacao}">XXXXXXXX</span>, e de acordo com o que consta no(s) Processo(s) n.ºs 25000.120464/2024-48, e com fundamento no art. 76, inciso II, alínea "a" da Lei nº 14.133 de 1º de abril de 2021, e no art. 14 do Decreto nº 12.785, de 19 de dezembro de 2025, têm entre si acordado o presente TERMO DE DOAÇÃO COM ENCARGOS, visando o desenvolvimento de ações conjuntas do eixo Saúde do Programa de Aceleração do Crescimento - Novo PAC, Portaria GM/MS nº 6.640, de 20 de fevereiro de 2025 e suas alterações, mediante as cláusulas e condições a seguir estabelecidas:</p>
+    
+    <p class="clausula">CLÁUSULA PRIMEIRA – DO OBJETO</p>
+    <p>O presente instrumento tem por objetivo a doação pela DOADORA ao DONATÁRIO de kits de equipamentos de teleconsulta destinados à operacionalização da Ação Estratégica SUS Digital - Telessaúde, cujas características constam do Anexo a este instrumento, tendo por finalidade a sua utilização para promover a saúde digital por meio de uma abordagem multidisciplinar que integra tecnologia, informação e saúde, não podendo haver destinação para quaisquer outros fins.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO ÚNICO.</span> O Anexo é parte integrante e indissociável deste Termo.</p>
+    
+    <p class="clausula">CLÁUSULA SEGUNDA – DA DESTINAÇÃO E UTILIZAÇÃO DOS BENS</p>
+    <p>Os bens ora doados para uso do DONATÁRIO somente poderão ser destinados para os fins e uso de interesse social mencionados neste termo, sendo a utilização restrita ao Programa de Aceleração do Crescimento - Novo PAC, instituído pelo Decreto nº 11.632, de 11 de agosto de 2023, e cujo processo de seleção para o eixo Saúde se deu por meio da Portaria GM/MS nº 6.640, de 20 de fevereiro de 2025.</p>
+    
+    <p class="clausula">CLÁUSULA TERCEIRA – OBRIGAÇÕES DA DOADORA</p>
+    <p>A DOADORA obriga-se a:</p>
+    <p class="alinea">a) Disponibilizar ao DONATÁRIO os bens mencionados na Cláusula Primeira, na forma e nos prazos previstos neste instrumento; e</p>
+    <p class="alinea">b) Fiscalizar o cumprimento dos encargos da presente doação.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO PRIMEIRO.</span> A DOADORA não se responsabilizará por qualquer vício redibitório, pela evicção ou qualquer outra forma de responsabilização contratual ou extracontratual pelos bens doados.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO SEGUNDO.</span> A entrega dos bens objeto do presente termo será efetuada diretamente ao DONATÁRIO pela empresa fornecedora contratada por meio da Ata de Registro de Preços nº 11/2025, mediante assinatura do Termo de Recebimento Provisório por parte do representante do DONATÁRIO.</p>
+    
+    <p class="clausula">CLÁUSULA QUARTA – OBRIGAÇÕES DO DONATÁRIO</p>
+    <p>O DONATÁRIO obriga-se a:</p>
+    <p class="alinea">a) Utilizar os bens para a execução das ações e atividades no âmbito do Programa de Aceleração do Crescimento - Novo PAC;</p>
+    <p class="alinea">b) Fazer constar do seu planejamento orçamentário e financeiro recursos destinados a manutenção dos bens doados, realizando, periodicamente, as manutenções preventivas previstas no Manual de cada bem;</p>
+    <p class="alinea">c) Realizar reparos eventualmente necessários, assegurando que a utilização dos bens pelo Programa de Aceleração do Crescimento - Novo PAC seja ininterrupta;</p>
+    <p class="alinea">d) Remeter à DOADORA, sempre que solicitado, os documentos comprobatórios da realização das manutenções;</p>
+    <p class="alinea">e) Se for o caso, acionar diretamente as garantias exigidas dos fornecedores nos prazos e formas estabelecidas no respectivo contrato;</p>
+    <p class="alinea">f) Manter os bens sob sua responsabilidade em local seguro e assumir, a partir da data do seu recebimento, todas as responsabilidades civis e administrativas que recaiam sobre os bens doados, ficando responsável pela reposição e instalação dos bens em caso de roubo, furto ou sinistro, desonerando a DOADORA de quaisquer responsabilidades;</p>
+    <p class="alinea">g) Sujeitar-se à fiscalização da DOADORA relativamente ao uso dos bens e às suas condições de manutenção;</p>
+    <p class="alinea">h) Fiscalizar o uso, a guarda e a conservação dos bens, bem como não os onerar e/ou alienar durante o prazo que perdurar a execução do programa, e</p>
+    <p class="alinea">i) Restituir os bens objeto deste instrumento à DOADORA, à entidade ou órgão indicados por esta, ou restituir à DOADORA o equivalente em dinheiro, devidamente atualizado, caso esta ou órgão de controle apure a utilização dos bens em desacordo com este Termo.</p>
+    <p class="alinea">j) Comprovar o recebimento, a instalação física e a efetiva disponibilização dos equipamentos para uso, nos termos e prazos dispostos na Portaria GM/MS nº 6.640, de 20 de fevereiro de 2025 e suas alterações.</p>
+    <p class="alinea">k) Providenciar o tombamento diretamente no próprio patrimônio, com registro no processo administrativo competente.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO PRIMEIRO.</span> A responsabilidade pelas obrigações assumidas no presente Termo de Doação com Encargos é única e exclusiva do DONATÁRIO, cujo início se dá com a assinatura do Termo de Recebimento Provisório.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO SEGUNDO.</span> O DONATÁRIO obriga-se a cumprir as obrigações decorrentes deste Termo pelo prazo que perdurar a execução do Programa de Aceleração do Crescimento - Novo PAC.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO TERCEIRO.</span> Findo o prazo de execução do Programa de Aceleração do Crescimento - Novo PAC pelo DONATÁRIO, e não havendo revogação do presente Termo de Doação, ao término da vida útil dos bens, caberá àquele proceder à destinação ambientalmente correta dos bens, em conformidade com a Política Nacional de Resíduos Sólidos, nos termos da Lei nº 12.305, de 2 de agosto de 2010, suas alterações posteriores e respectivos regulamentos.</p>
+    
+    <p class="clausula">CLÁUSULA QUINTA – DA REVOGAÇÃO TOTAL OU PARCIAL</p>
+    <p>Em caso de constatação, pela DOADORA ou pelos órgãos de controle externo, quanto a não utilização dos bens doados para os fins e forma a que se propõe a presente doação, será promovida à revogação parcial ou total deste termo, estando reservado o direito de reclamar a restituição dos bens doados, podendo realocá-los em outra unidade federativa, sem direito de indenização ao DONATÁRIO.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO PRIMEIRO.</span> Revogada a doação deverá o DONATÁRIO devolver imediatamente o objeto da doação à DOADORA, arcando com os custos da devolução e sem qualquer ônus financeiro pendente.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO SEGUNDO.</span> Revogada a doação, por culpa do DONATÁRIO, este sujeitar-se-á ao pagamento de indenização à DOADORA no valor correspondente à depreciação do objeto da doação devolvido por ocasião da revogação, ou seu valor integral, no caso da não devolução.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO TERCEIRO.</span> A revogação do termo, quando resulte dano ao Erário, ensejará a instauração de Tomada de Contas Especial-TCE.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO QUARTO.</span> A DOADORA, sob seu exclusivo juízo de conveniência e oportunidade, desde que devidamente justificado, poderá reservar-se o direito de reclamar a restituição do valor atualizado do objeto da doação no caso de revogação parcial ou total deste termo de doação com encargos.</p>
+    
+    <p class="clausula">CLÁUSULA SEXTA – DO ACOMPANHAMENTO E DA FISCALIZAÇÃO</p>
+    <p>Incumbe à DOADORA exercer as atribuições de acompanhamento, fiscalização e avaliação do cumprimento das obrigações do DONATÁRIO constante deste termo, podendo firmar parcerias com outros órgãos e entidades para o exercício das atribuições previstas nesta Cláusula.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO ÚNICO.</span> O DONATÁRIO deverá apresentar, sempre que solicitado pela DOADORA, todos os documentos referentes aos bens, para que a DOADORA determine, quando necessário, as providências as serem adotadas para a adequação a este termo, no prazo de 15 (quinze) dias a contar da constatação do fato, ou para a aplicação das penalidades previstas na legislação vigente e neste instrumento.</p>
+    
+    <p class="clausula">CLÁUSULA SÉTIMA – DO RECEBIMENTO DOS BENS</p>
+    <p>O DONATÁRIO, por intermédio deste instrumento, atesta, plena e irrestritamente, o recebimento de todos os bens arrolados no Anexo a este Termo de Doação.</p>
+    
+    <p class="clausula">CLÁUSULA OITAVA – DA AVALIAÇÃO DOS BENS</p>
+    <p>Aos bens objeto da presente doação, são atribuídos os seguintes valores:</p>
+    
+    <div th:if="${regiao == 'NORTE' or regiao == 'CENTRO_OESTE' or regiao == 'SUDESTE'}">
+        <p style="text-align: center; font-weight: bold; margin-top: 20px;">Grupo 1 - Regiões Norte, Centro-Oeste e Sudeste</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>ESPECIFICAÇÃO</th>
+                    <th>UNIDADE DE MEDIDA</th>
+                    <th>VALOR UNITÁRIO R$</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Televisor</td>
+                    <td>Unidade</td>
+                    <td>1.625,00</td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td>Notebook</td>
+                    <td>Unidade</td>
+                    <td>4.058,00</td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td>Câmera de videoconferência</td>
+                    <td>Unidade</td>
+                    <td>1.353,94</td>
+                </tr>
+                <tr class="valor-total">
+                    <td colspan="3" style="text-align: right;">Valor Total (R$)</td>
+                    <td>7.036,94</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:if="${regiao == 'NORDESTE' or regiao == 'SUL'}">
+        <p style="text-align: center; font-weight: bold; margin-top: 20px;">Grupo 2 - Regiões Nordeste e Sul</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>ESPECIFICAÇÃO</th>
+                    <th>UNIDADE DE MEDIDA</th>
+                    <th>VALOR UNITÁRIO R$</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>04</td>
+                    <td>Televisor</td>
+                    <td>Unidade</td>
+                    <td>1.625,00</td>
+                </tr>
+                <tr>
+                    <td>05</td>
+                    <td>Notebook</td>
+                    <td>Unidade</td>
+                    <td>3.263,51</td>
+                </tr>
+                <tr>
+                    <td>06</td>
+                    <td>Câmera de videoconferência</td>
+                    <td>Unidade</td>
+                    <td>1.250,00</td>
+                </tr>
+                <tr class="valor-total">
+                    <td colspan="3" style="text-align: right;">Valor Total (R$)</td>
+                    <td>6.138,51</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO ÚNICO.</span> Os valores foram atribuídos de acordo com dados contidos no Portal Nacional de Contratações Públicas, disponível no link https://pncp.gov.br/app/atas/00394544000185/2024/2569/1 - ARP nº 11/2025, cujo objeto é o Registro de preço para eventual contratação de equipamentos destinados à operacionalização da estratégia de Telessaúde.</p>
+    
+    <p class="clausula">CLÁUSULA NONA – DA EXTINÇÃO DO TERMO DE DOAÇÃO COM ENCARGOS</p>
+    <p>O presente Termo poderá ser extinto:</p>
+    <p class="alinea">a) Pelo cumprimento das obrigações pelas partes, quando o objeto da doação será revertido definitivamente ao patrimônio do DONATÁRIO;</p>
+    <p class="alinea">b) Por denúncia, a qualquer tempo, ficando os partícipes responsáveis somente pelas obrigações e auferindo as vantagens do tempo em que participaram voluntariamente da avença;</p>
+    <p class="alinea">c) Pela revogação, total ou parcial, pela DOADORA ou pelos órgãos de controle externo, no caso de não utilização dos bens doados para os fins e na forma a que se propõe a presente doação, nos termos da Cláusula Sexta.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO PRIMEIRO.</span> O DONATÁRIO se desincumbirá dos encargos em decorrência do fim da vida útil dos bens, desde que não tenha dado causa, mediante pedido direcionado à DOADORA, contendo as pertinentes justificativas sobre o emprego dos bens doados.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO SEGUNDO.</span> A extinção do Termo quando resulte dano ao Erário, enseja a instauração de Tomada de Contas Especial.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO TERCEIRO.</span> Excetuada a hipótese do item "a", a DOADORA, deverá reclamar a restituição do objeto da doação, ou, sob seu exclusivo juízo de conveniência e oportunidade, desde que devidamente justificado, reclamar a restituição do seu valor atualizado.</p>
+    <p class="paragrafo"><span class="destaque">PARÁGRAFO QUARTO.</span> Excetuada a hipótese do item "a", o DONATÁRIO compromete-se a entregar à DOADORA, no prazo de 15 dias a contar da Extinção, toda a documentação relativa aos bens.</p>
+    
+    <p class="clausula">CLÁUSULA DÉCIMA – DA PUBLICIDADE</p>
+    <p>Incumbirá à DOADORA providenciar a publicidade deste instrumento no portal oficial do Ministério da Saúde, em até 20 (vinte) dias úteis da assinatura do presente instrumento.</p>
+    
+    <p class="clausula">CLÁUSULA DÉCIMA PRIMEIRA – DA CONCILIAÇÃO E DO FORO</p>
+    <p>As controvérsias, decorrentes do presente Termo de Doação, que não puderem ser resolvidas amigavelmente pelos partícipes, serão dirimidas pela Câmara de Mediação e de Conciliação da Administração Pública Federal, com renúncia expressa de qualquer outro foro, por mais privilegiado que seja.</p>
+    
+    <p>E pelas partes estarem de pleno acordo, assinam eletronicamente este instrumento, por meio do Sistema Eletrônico de Informações (SEI) Saúde.</p>
+    
+    <div class="assinatura">
+        <p><span th:text="${cidade}">_________________</span>, <span th:text="${#temporals.format(dataAtual, 'dd')}">______</span> de fevereiro de 2026.</p>
+        
+        <div class="assinatura-linha"></div>
+        <p class="assinatura-nome">JOÃO PEDRO BRAGA FÉLIX</p>
+        <p class="assinatura-cargo">Diretor do Departamento de Saúde Digital e Inovação</p>
+        <p class="assinatura-cargo">DESD/SEIDIGI</p>
+        <p class="assinatura-cargo">Ministério da Saúde – MS</p>
+        
+        <div class="assinatura-linha"></div>
+        <p class="assinatura-nome" th:text="${nomeResponsavel}">____________________________________</p>
+        <p class="assinatura-cargo" th:text="${cargo}">Cargo ________________________</p>
+        <p class="assinatura-cargo" th:text="${nomeOrgao}">Órgão________________________</p>
+    </div>
+    
+    <div class="anexo">
+        <h2>ANEXO</h2>
+        <h2>DESCRITIVO TÉCNICO DO KIT DE EQUIPAMENTOS PARA TELECONSULTA</h2>
+        
+        <p class="clausula" style="text-indent: 0;">Composição do Kit Multimídia de Telessaúde</p>
+        <ul>
+            <li><span class="destaque">Notebook:</span> equipamento principal para videoconferência, acesso a prontuários e plataformas de telessaúde; conexão por Ethernet (preferencial) ou Wi-Fi; uso contínuo ligado à energia.</li>
+            <li><span class="destaque">Smart TV 43":</span> utilizada como monitor ampliado para exibição de participantes, documentos e exames; conexão via HDMI ao notebook; posicionamento frontal, com centro da tela na altura dos olhos.</li>
+            <li><span class="destaque">Câmera de videoconferência:</span> conexão ao notebook via cabo do próprio equipamento; fixação no topo do notebook/TV; distância recomendada de ~1 a 1,5 m; testes prévios de imagem e microfone.</li>
+            <li><span class="destaque">Materiais de identidade visual:</span> placa de identificação, backdrop (fundo para vídeo), banner e 2 adesivos (10×25 cm) para ambientação e sinalização da sala de telessaúde.</li>
+        </ul>
+        
+        <p class="clausula" style="text-indent: 0;">Infraestrutura e conectividade recomendadas</p>
+        <ul>
+            <li><span class="destaque">Internet estável:</span> mínimo sugerido de 10 Mbps (download) e 5 Mbps (upload); preferir cabeamento de rede (Ethernet); Wi-Fi com sinal forte como alternativa.</li>
+            <li><span class="destaque">Cadeia de cabos:</span> HDMI (notebook → TV) e USB/conexão dedicada (câmera → notebook); organização dos cabos para segurança e desempenho.</li>
+            <li><span class="destaque">Ambiente:</span> sala silenciosa, com privacidade e vedação acústica; iluminação branca e difusa (evitar contraluz), ventilação adequada e mobiliário ergonômico.</li>
+        </ul>
+        
+        <p class="clausula" style="text-indent: 0;">Operação e uso</p>
+        <ul>
+            <li>Testes prévios de vídeo/áudio e conexão antes de cada sessão; manter sistemas e aplicativos de videoconferência atualizados e acesso aos sistemas clínicos (e-SUS APS/PEC).</li>
+            <li>Posicionamento da câmera centralizado; ajustes de ângulo e foco para enquadrar profissional e, quando necessário, o paciente.</li>
+            <li>TV configurada na entrada HDMI correta e notebook sempre conectado à energia durante o uso.</li>
+        </ul>
+        
+        <p class="clausula" style="text-indent: 0;">Proteção elétrica e suporte</p>
+        <ul>
+            <li>Recomendado estabilizador ou nobreak para proteção dos equipamentos.</li>
+            <li>Em caso de falha em período de garantia: registrar número de série, consultar termo/nota fiscal, acionar assistência conforme orientações do fabricante; não realizar reparos por conta própria.</li>
+        </ul>
+        
+        <p class="clausula" style="text-indent: 0;">Comprovação de recebimento e instalação</p>
+        <ul>
+            <li>Registro fotográfico com todos os itens do kit e envio conforme instruções do manual;</li>
+            <li>Preenchimento de formulário eletrônico indicado; responsabilidade da Secretaria Municipal de Saúde pela conferência de integridade.</li>
+        </ul>
+        
+        <p class="clausula" style="text-indent: 0;">Aplicabilidade na APS</p>
+        <ul>
+            <li>Suporte a teleconsultas, teleconsultorias (síncronas/assíncronas), teleinterconsultas, telediagnóstico, telemonitoramento e teleducação; kit destinado à estruturação de Pontos de Telessaúde na UBS.</li>
+        </ul>
+        
+        <p class="rodape"><span class="destaque">Obs.:</span> Favor realizar leitura do documento MANUAL DE USO DO KIT MULTIMÍDIA DE TELESSAÚDE - NOVO PAC, disponível pelo link de acesso: https://www.gov.br/saude/pt-br/assuntos/novo-pacsaude/kits-de-telessaude</p>
+    </div>
+    
+    <div class="rodape">
+        <p style="margin-top: 50px; font-size: 9pt;">
+            <span class="destaque">ID do Termo:</span> <span th:text="${uuid}">UUID</span><br/>
+            <span class="destaque">Data de Geração:</span> <span th:text="${#temporals.format(dataGeracao, 'dd/MM/yyyy HH:mm:ss')}">Data</span>
+        </p>
+    </div>
+</body>
+</html>

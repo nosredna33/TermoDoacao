@@ -1,6 +1,6 @@
 # Sistema de Termos de Entrega - Ministério da Saúde
 
-Sistema completo de gerenciamento de termos de entrega de equipamentos para municípios brasileiros.
+Sistema completo de gerenciamento de termos de entrega de equipamentos para municípios brasileiros com geração de PDF, assinatura digital via GOV.BR e upload de termos assinados.
 
 ## 🚀 Funcionalidades
 
@@ -19,7 +19,11 @@ Sistema completo de gerenciamento de termos de entrega de equipamentos para muni
   - Listagem com paginação
   - Busca avançada por nome, CPF, e-mail, município, órgão
   - Visualização detalhada
-  - Geração de PDF individual
+  - **Geração de PDF do Termo de Doação oficial**
+  - **Download e visualização de PDF**
+  - **Link direto para assinatura digital via GOV.BR**
+  - **Upload de termo assinado**
+  - **Rastreamento de status** (Pendente/Assinado)
 - **Gerenciamento de Usuários:**
   - CRUD completo
   - Controle de perfis (ADMIN, USER)
@@ -30,6 +34,37 @@ Sistema completo de gerenciamento de termos de entrega de equipamentos para muni
 - **Monitoramento:**
   - Spring Actuator (health, metrics, info)
   - Logs estruturados
+
+### 🆕 Termo de Doação com Encargos (NOVO!)
+
+**Fluxo completo implementado:**
+
+1. **Gerar PDF do Termo**
+   - Template profissional com todos os dados preenchidos
+   - Identificação única (UUID)
+   - Dados do responsável e órgão
+   - Endereço completo e código IBGE
+   - Descrição dos equipamentos doados
+   - Texto legal completo
+
+2. **Baixar/Visualizar**
+   - Download direto do PDF
+   - Visualização no navegador
+
+3. **Assinar via GOV.BR**
+   - Link direto para portal de assinatura digital
+   - https://www.gov.br/governodigital/pt-br/assinatura-eletronica
+
+4. **Upload do Termo Assinado**
+   - Campo de upload de arquivo PDF
+   - Validação de tipo (apenas PDF)
+   - Limite de tamanho: 10MB
+   - Armazenamento seguro em `uploads/termos-assinados/`
+
+5. **Rastreamento de Status**
+   - Status: Pendente → Assinado
+   - Data de assinatura registrada
+   - Nome do arquivo armazenado
 
 ## 📋 Pré-requisitos
 
@@ -173,6 +208,13 @@ termos-entrega-municipios/
 │   │       ├── db/              # Scripts SQL
 │   │       ├── static/          # CSS, JS, imagens
 │   │       └── templates/       # Templates Thymeleaf
+│   │           ├── admin/       # Área administrativa
+│   │           ├── auth/        # Login e autenticação
+│   │           ├── public/      # Formulário público
+│   │           ├── pdf/         # Template do Termo de Doação
+│   │           └── layout/      # Layout base
+├── uploads/                     # Termos assinados (criado automaticamente)
+├── termos_entrega.db            # Banco SQLite (criado pelo script)
 ├── init-database.sh             # Script de inicialização do BD
 ├── pom.xml                      # Dependências Maven
 └── README.md                    # Este arquivo
@@ -188,7 +230,7 @@ cd termos-entrega-municipios
 mvn spring-boot:run
 ```
 
-### 2. Demonstração (15-20 minutos)
+### 2. Demonstração (20-25 minutos)
 
 #### a) **Dashboard Administrativo** (5 min)
 - Fazer login: admin@saude.gov.br / 123456
@@ -198,26 +240,29 @@ mvn spring-boot:run
   - Gráfico de rosca por estado
 - Explicar distribuição geográfica
 
-#### b) **Gerenciamento de Termos** (5 min)
+#### b) **Gerenciamento de Termos** (3 min)
 - Acessar lista de termos
 - Demonstrar busca avançada (ex: buscar "São Paulo")
 - Abrir detalhes de um termo
-- Gerar PDF de um termo
 
-#### c) **Formulário Público** (3 min)
+#### c) **Termo de Doação - DESTAQUE!** (7 min)
+- **Mostrar seção "Termo de Doação com Encargos"**
+- **Passo 1:** Clicar em "Baixar PDF" e mostrar o documento gerado
+- **Passo 2:** Clicar em "Visualizar" para abrir no navegador
+- **Passo 3:** Mostrar link "Ir para GOV.BR" para assinatura digital
+- **Passo 4:** Demonstrar upload de termo assinado
+- **Mostrar status:** Pendente → Assinado
+
+#### d) **Formulário Público** (3 min)
 - Acessar formulário público
 - Demonstrar validação de CPF
 - Demonstrar autocomplete de municípios
 - Submeter um novo termo
 
-#### d) **Gerenciamento de Usuários** (2 min)
+#### e) **Gerenciamento de Usuários** (2 min)
 - Listar usuários
 - Criar novo usuário
 - Mostrar validação de e-mail duplicado
-
-#### e) **Monitoramento** (2 min)
-- Acessar /actuator/health
-- Mostrar métricas disponíveis
 
 ### 3. Perguntas e Respostas (5 min)
 
@@ -247,13 +292,33 @@ java -version
 # Deve ser Java 11 ou superior
 ```
 
+### Erro: "uploads directory not found"
+```bash
+# O diretório é criado automaticamente na primeira execução
+# Se necessário, crie manualmente:
+mkdir -p uploads/termos-assinados
+```
+
 ## 📝 Notas Importantes
 
 1. **Banco de Dados:** O arquivo `termos_entrega.db` é criado automaticamente no diretório raiz do projeto
-2. **Logs:** Os logs são salvos em `logs/termos-entrega.log`
+2. **Logs:** Os logs são salvos em `app.log`
 3. **Porta:** A aplicação roda na porta 8080 por padrão
 4. **Autenticação:** Sistema de autenticação customizado (sem Spring Security)
 5. **Sessão:** Sessão HTTP padrão do Tomcat
+6. **Uploads:** Termos assinados são salvos em `uploads/termos-assinados/`
+7. **PDF:** Gerado dinamicamente com Flying Saucer
+
+## 🎯 Destaques para o Chefe
+
+1. **Gráficos Interativos** - Visualização clara da distribuição geográfica
+2. **Interface Moderna** - Design profissional estilo Oracle APEX
+3. **Termo de Doação Completo** - Geração, assinatura e upload integrados
+4. **Busca Inteligente** - Encontra termos por qualquer campo
+5. **Validações Robustas** - CPF, e-mails, dados duplicados
+6. **Pronto para Produção** - Código limpo, sem placeholders
+7. **Escalável** - Arquitetura MVC com boas práticas
+8. **Rastreamento Completo** - Status de assinatura de cada termo
 
 ## 🚀 Próximos Passos (Sugestões)
 
@@ -264,6 +329,7 @@ java -version
 - [ ] Notificações em tempo real
 - [ ] Integração com API do IBGE
 - [ ] Deploy em produção (Heroku, AWS, Azure)
+- [ ] Integração direta com API do GOV.BR para assinatura
 
 ## 📞 Suporte
 
@@ -278,3 +344,4 @@ Para dúvidas ou problemas, consulte a documentação do Spring Boot:
 **Versão:** 1.0.0  
 **Data:** Fevereiro 2026  
 **Licença:** Uso interno governamental
+

@@ -1,5 +1,6 @@
 package br.gov.saude.termosentrega.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,14 +10,18 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfig {
-
+    
+    @Value("${spring.datasource.url}")
+    private String databaseUrl;
+    
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+    
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.sqlite.JDBC");
-        
-        String dbPath = "termos_entrega.db";
-        dataSource.setUrl("jdbc:sqlite:" + dbPath);
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(databaseUrl);
         
         return dataSource;
     }

@@ -102,4 +102,49 @@ public class PdfService {
         
         return baos.toByteArray();
     }
+    
+    public byte[] gerarTermoDoacaoPdf(TermoEntrega termo) throws Exception {
+        Context context = new Context();
+        
+        // Dados do município e responsável
+        context.setVariable("municipio", termo.getNomeMunicipio().toUpperCase());
+        context.setVariable("cnpj", "00.000.000/0000-00"); // CNPJ da Secretaria Municipal
+        context.setVariable("endereco", termo.getEndereco() + ", " + termo.getBairro());
+        context.setVariable("cep", termo.getCep());
+        context.setVariable("nomeResponsavel", termo.getNomeResponsavel());
+        context.setVariable("cargo", termo.getCargo());
+        context.setVariable("nomeOrgao", termo.getNomeOrgao());
+        context.setVariable("ato_nomeacao", "Portaria de Nomeação");
+        
+        // Determinar região baseada na UF
+        String regiao = determinarRegiao(termo.getUf());
+        context.setVariable("regiao", regiao);
+        
+        // Dados de assinatura
+        context.setVariable("cidade", termo.getCidade());
+        context.setVariable("dataAtual", java.time.LocalDateTime.now());
+        
+        // Identificação do termo
+        context.setVariable("uuid", termo.getUuid());
+        context.setVariable("dataGeracao", java.time.LocalDateTime.now());
+        
+        return gerarRelatorioHtml("pdf/termo-doacao", context);
+    }
+    
+    private String determinarRegiao(String uf) {
+        switch (uf.toUpperCase()) {
+            case "AC": case "AP": case "AM": case "PA": case "RO": case "RR": case "TO":
+                return "NORTE";
+            case "AL": case "BA": case "CE": case "MA": case "PB": case "PE": case "PI": case "RN": case "SE":
+                return "NORDESTE";
+            case "DF": case "GO": case "MT": case "MS":
+                return "CENTRO_OESTE";
+            case "ES": case "MG": case "RJ": case "SP":
+                return "SUDESTE";
+            case "PR": case "RS": case "SC":
+                return "SUL";
+            default:
+                return "SUDESTE";
+        }
+    }
 }

@@ -21,7 +21,10 @@ public class AuthInterceptor implements HandlerInterceptor {
             uri.startsWith("/js/") || 
             uri.startsWith("/images/") ||
             uri.startsWith("/actuator/health") ||
-            uri.startsWith("/api/municipios/")) {
+            uri.startsWith("/api/municipios/") ||
+            uri.equals("/admin/dashboard") ||
+            uri.startsWith("/api/relatorios/") ||
+            uri.equals("/error")) {
             return true;
         }
         
@@ -31,8 +34,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
         
-        // Redirecionar para login
-        response.sendRedirect("/auth/login");
+        // Redirecionar para dashboard
+        response.sendRedirect("/admin/dashboard");
         return false;
     }
 }

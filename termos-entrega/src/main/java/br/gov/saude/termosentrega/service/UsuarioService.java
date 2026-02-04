@@ -22,22 +22,28 @@ public class UsuarioService {
     }
     
     public Optional<Usuario> autenticar(String email, String senha) {
+        System.out.println("[AUTH] Tentando autenticar: " + email);
         Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
         
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
-            String hashBanco = usuario.getSenha();
+            System.out.println("[AUTH] Usuário encontrado: " + usuario.getNome());
+            System.out.println("[AUTH] Usuário ativo: " + usuario.isAtivo());
+            System.out.println("[AUTH] Hash no banco: " + usuario.getSenha().substring(0, 20) + "...");
+            System.out.println("[AUTH] Senha fornecida: " + senha);
             
-            // Converter $2b$ para $2a$ para compatibilidade com jBCrypt
-            if (hashBanco.startsWith("$2b$")) {
-                hashBanco = "$2a$" + hashBanco.substring(4);
-            }
+            boolean senhaCorreta = BCrypt.checkpw(senha, usuario.getSenha());
+            System.out.println("[AUTH] Senha correta: " + senhaCorreta);
             
-            if (usuario.isAtivo() && BCrypt.checkpw(senha, hashBanco)) {
+            if (usuario.isAtivo() && senhaCorreta) {
+                System.out.println("[AUTH] Autenticação bem-sucedida!");
                 return Optional.of(usuario);
             }
+        } else {
+            System.out.println("[AUTH] Usuário não encontrado");
         }
         
+        System.out.println("[AUTH] Autenticação falhou");
         return Optional.empty();
     }
     
@@ -54,9 +60,23 @@ public class UsuarioService {
     }
     
     public Usuario save(Usuario usuario) {
-        if (usuario.getSenha() != null && !usuario.getSenha().startsWith("$2")) {
-            usuario.setSenha(BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt()));
+        if (usuario.getId() == null) {
+            // Novo usuário - criptografar senha
+            String senhaCriptografada = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
+            usuario.setSenha(senhaCriptografada);
+        } else {
+            // Atualização - verificar se senha foi alterada
+            Optional<Usuario> usuarioExistente = usuarioRepository.findById(usuario.getId());
+            if (usuarioExistente.isPresent()) {
+                String senhaAtual = usuarioExistente.get().getSenha();
+                if (!usuario.getSenha().equals(senhaAtual)) {
+                    // Senha foi alterada, criptografar
+                    String senhaCriptografada = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
+                    usuario.setSenha(senhaCriptografada);
+                }
+            }
         }
+        
         return usuarioRepository.save(usuario);
     }
     
@@ -72,7 +92,6 @@ public class UsuarioService {
             String token = UUID.randomUUID().toString();
             LocalDateTime expiracao = LocalDateTime.now().plusHours(24);
             
-            usuarioRepository.updatePasswordResetToken(email, token, expiracao);
             usuario.setTokenRecuperacaoSenha(token);
             usuario.setTokenExpiracao(expiracao);
             usuarioRepository.save(usuario);
@@ -104,7 +123,11 @@ public class UsuarioService {
                 usuario.getTokenExpiracao().isAfter(LocalDateTime.now())) {
                 
                 String senhaCriptografada = BCrypt.hashpw(novaSenha, BCrypt.gensalt());
-                usuarioRepository.updatePassword(usuario.getId(), senhaCriptografada);
+                usuario.setSenha(senhaCriptografada);
+                usuario.setTokenRecuperacaoSenha(null);
+                usuario.setTokenExpiracao(null);
+                usuarioRepository.save(usuario);
+                
                 return true;
             }
         }
