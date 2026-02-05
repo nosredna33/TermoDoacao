@@ -133,10 +133,13 @@ Segue o Prompt usado para chegar a este resultado [PromptProjeto.md](https://git
    - Botão direito no projeto → Run As → Spring Boot App
    - Aguarde a mensagem: `Started TermosEntregaApplication`
 
-5. **Acessar o sistema:**
-   - URL: http://localhost:8080
-   - Login: admin@saude.gov.br
-   - Senha: 123456
+5. **🔑 Credenciais de Acesso:**
+   - **URL:** (http://localhost:8080)[http://localhost:8080]
+   - **E-mail:** admin@saude.gov.br
+   - **Senha:** Admin@123456
+   - **Perfil:** ADMIN (acesso total)   
+ > > `ATENÇÃO!` Trocar este usuário após a instalação...
+ 
 
 ### Opção 2: Via Linha de Comando
 
@@ -157,13 +160,6 @@ java -jar target/termos-entrega-municipios-1.0.0.jar
 # 5. Acessar
 # http://localhost:8080
 ```
-
-## 🔑 Credenciais de Acesso
-
-### Usuário Administrador
-- **E-mail:** admin@saude.gov.br
-- **Senha:** 123456
-- **Perfil:** ADMIN (acesso total)
 
 ## 📊 Dados de Demonstração
 
